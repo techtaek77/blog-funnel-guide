@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>블로그에 세일즈 퍼널을 이식하는 법 — 마케팅 설계자 3대 공식 | TECHTAEK</title>
+<meta name="description" content="러셀 브런슨의 『마케팅 설계자(DotCom Secrets)』 핵심인 매력적인 캐릭터, 후크-스토리-제안, 가치 사다리를 블로그 운영에 적용하는 설명 페이지와 시뮬레이터.">
+<meta property="og:title" content="글만 쓰고 끝내면 손님도 그냥 나갑니다 — 블로그 퍼널 & 가치 사다리">
+<meta property="og:description" content="내 생각을 담는 캐릭터 설정부터 포스팅 3단 템플릿, 애드센스 너머의 가치 사다리 시뮬레이터까지 한 페이지에 모았습니다.">
+<meta property="og:image" content="https://techtaek77.github.io/blog-funnel-guide/assets/veloki.png">
+<style>
+:root{
+  --bg:#f5f7fb;--paper:#ffffff;--ink:#152238;--muted:#58677d;--line:#dfe6f2;
+  --blue:#2b54e4;--blue-soft:#eaf0ff;--green:#15805c;--green-soft:#e3f6ef;
+  --amber:#d98218;--amber-soft:#fff5e5;--rose:#d13b67;--rose-soft:#fdebf0;
+  --code:#111a2e;--code-ink:#edf2ff;--shadow:0 2px 6px rgba(21,34,56,.04),0 10px 28px rgba(21,34,56,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0d1320;--paper:#151f33;--ink:#e9eef9;--muted:#9ba9c1;--line:#26334d;
+    --blue:#7a9bff;--blue-soft:#1b2948;--green:#5ad4a8;--green-soft:#13352b;
+    --amber:#f5b04c;--amber-soft:#2c2212;--rose:#ff87ab;--rose-soft:#3a1926;
+    --code:#090e1a;--shadow:none;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,-apple-system,sans-serif;word-break:keep-all;overflow-wrap:break-word}
+main{max-width:1020px;margin:0 auto;padding:36px 20px 64px}
+a{color:var(--blue);text-underline-offset:3px}
+h1,h2,h3{letter-spacing:-.03em;line-height:1.3;margin:0}
+h2{font-size:clamp(1.38rem,2.8vw,1.75rem);margin-bottom:.35em}
+h3{font-size:1.08rem;margin-bottom:.35em}
+p{margin:.5em 0}
+section{margin-top:52px}
+.kicker{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.11em;color:var(--blue);text-transform:uppercase;margin-bottom:6px}
+.sub{color:var(--muted);margin:0 0 20px;max-width:720px}
+.hero{display:grid;grid-template-columns:1fr 240px;gap:28px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:36px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-70px;top:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,var(--blue-soft),transparent 70%)}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);margin:.15em 0 .35em;letter-spacing:-.045em}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.lead{font-size:1.06rem;color:var(--muted);max-width:620px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:.85rem;font-weight:600}
+.chip b{color:var(--blue)}
+.mascot{text-align:center}
+.mascot img{width:100%;max-width:190px;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:50%;border:1px solid var(--line)}
+.bubble{display:inline-block;margin-top:10px;background:var(--ink);color:var(--bg);border-radius:14px;padding:8px 13px;font-size:.85rem;font-weight:600;position:relative}
+.bubble::before{content:"";position:absolute;top:-7px;left:50%;margin-left:-7px;border:7px solid transparent;border-top:0;border-bottom-color:var(--ink)}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.badge{display:inline-block;font-size:.76rem;font-weight:800;border-radius:8px;padding:3px 9px;margin-bottom:10px}
+.b-blue{background:var(--blue-soft);color:var(--blue)}
+.b-green{background:var(--green-soft);color:var(--green)}
+.b-amber{background:var(--amber-soft);color:var(--amber)}
+.b-rose{background:var(--rose-soft);color:var(--rose)}
+.trans{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:.93rem}
+.trans b{display:block;color:var(--blue);font-size:.82rem;margin-bottom:2px}
+
+.ladder{display:flex;flex-direction:column;gap:10px}
+.rung{display:grid;grid-template-columns:130px 1fr 220px;gap:14px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px;box-shadow:var(--shadow)}
+.rung.highlight{border:2px solid var(--blue);background:var(--blue-soft)}
+.rung .step-tag{font-weight:800;font-size:.92rem;color:var(--blue)}
+.rung .price-tag{text-align:right;font-size:.86rem;font-weight:700;color:var(--muted)}
+
+.sim-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:18px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:var(--shadow)}
+.control{margin-bottom:16px}
+.control label{display:flex;justify-content:space-between;font-size:.9rem;font-weight:700;margin-bottom:6px}
+.control input[type=range]{width:100%;accent-color:var(--blue)}
+.sim-out{display:flex;flex-direction:column;justify-content:space-between;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:20px}
+.bar-group{margin:10px 0 16px}
+.bar-label{display:flex;justify-content:space-between;font-size:.88rem;font-weight:700;margin-bottom:5px}
+.bar-track{height:24px;background:var(--line);border-radius:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:8px;transition:width .25s ease}
+.fill-ads{background:#687792}
+.fill-funnel{background:linear-gradient(90deg,var(--blue),var(--green))}
+.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+.kpi span{display:block;font-size:.78rem;color:var(--muted)}
+.kpi strong{font-size:1.25rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.sim-note{font-size:.8rem;color:var(--muted);margin-top:10px;line-height:1.5}
+
+.table-wrap{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:580px}
+th,td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--bg);font-size:.83rem;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+
+.prompts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.prompt{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+pre{flex:1;white-space:pre-wrap;background:var(--code);color:var(--code-ink);border-radius:12px;padding:15px;margin:10px 0 12px;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace}
+button.copy-btn{align-self:flex-start;border:0;background:var(--blue);color:#fff;border-radius:10px;padding:9px 15px;font:inherit;font-size:.88rem;font-weight:700;cursor:pointer}
+button.copy-btn:hover{opacity:.92}
+
+.warn-box{background:var(--amber-soft);border:1px solid var(--amber);border-radius:20px;padding:20px 24px}
+footer{border-top:1px solid var(--line);margin-top:56px;padding-top:22px;font-size:.85rem;color:var(--muted)}
+footer a{margin-right:12px}
+
+@media (max-width:780px){
+  .hero,.grid3,.sim-wrap,.prompts{grid-template-columns:1fr}
+  .mascot{order:-1;display:flex;align-items:center;gap:14px;text-align:left}
+  .mascot img{width:88px}
+  .bubble{margin-top:0}
+  .bubble::before{display:none}
+  .rung{grid-template-columns:1fr;gap:4px}
+  .rung .price-tag{text-align:left}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="hero">
+  <div>
+    <span class="kicker">TECHTAEK · Blog Funnel Lab</span>
+    <h1>글만 쓰고 끝내면<br><em>손님도 그냥</em> 나갑니다</h1>
+    <p class="lead">러셀 브런슨의 『마케팅 설계자(DotCom Secrets)』를 읽고 내 블로그 운영에 대입해 봤습니다. AI 검색 시대에 조회수만 쫓다 지치지 않으려면 <strong>내 관점(캐릭터)</strong>, <strong>글 끝의 제안(오퍼)</strong>, 그리고 <strong>가치 사다리</strong>부터 깔아야 합니다.</p>
+    <div class="chips">
+      <span class="chip">원서 <b>DotCom Secrets</b></span>
+      <span class="chip">핵심 공식 <b>3가지</b></span>
+      <span class="chip">블로그 단계 <b>4단 사다리</b></span>
+      <span class="chip">복사용 <b>마크다운 템플릿</b></span>
+    </div>
+  </div>
+  <div class="mascot">
+    <img src="assets/veloki.png" alt="TECHTAEK 공식 캐릭터 A 벨로키">
+    <span class="bubble">정보만 주면 읽고 바로 뒤로 가기 누름…</span>
+  </div>
+</header>
+
+<section id="concepts">
+  <span class="kicker">01 · 업계어 사람말 번역</span>
+  <h2>책에 나오는 마케팅 용어 3개, 블로그 말로 바꾸면 이렇습니다</h2>
+  <p class="sub">어려운 퍼널 용어를 외울 필요 없습니다. 우리가 매일 쓰는 블로그 포스팅 하나에 그대로 대응됩니다.</p>
+  <div class="grid3">
+    <div class="card">
+      <span class="badge b-blue">SECRET 4 · 매력적인 캐릭터</span>
+      <h3>“내 생각이 빠진 요약글은 AI가 3초 만에 대체합니다”</h3>
+      <p>공식 문서 요약이나 기능 나열은 ChatGPT가 더 잘합니다. 독자가 내 블로그를 다시 찾는 건 ‘내가 겪은 삽질’과 ‘나는 왜 이렇게 판단했는가’라는 <strong>관점(Polarity)</strong> 때문입니다.</p>
+      <div class="trans">
+        <b>👉 블로그 적용 한 줄</b>
+        글 마지막에 “그래서 제 생각은 이렇습니다”라는 오너 관점 문단과 고유 캐릭터(벨로키)를 남긴다.
+      </div>
+    </div>
+    <div class="card">
+      <span class="badge b-green">SECRET 2 · 후크 - 스토리 - 제안</span>
+      <h3>“감사합니다로 글을 끝내면 100% 이탈합니다”</h3>
+      <p>전통적인 블로그는 정보만 주고 인사하며 끝납니다. 반면 퍼널형 글은 <strong>통념을 깨는 질문(Hook) → 확인·실패 과정(Story) → 독자가 바로 가져갈 선물(Offer)</strong>로 닫힙니다.</p>
+      <div class="trans">
+        <b>👉 블로그 적용 한 줄</b>
+        포스팅 끝에 복사용 프롬프트, 체크리스트, 인터랙티브 계산기 링크 중 하나를 반드시 놓는다.
+      </div>
+    </div>
+    <div class="card">
+      <span class="badge b-amber">SECRET 3 · 가치 사다리 (Value Ladder)</span>
+      <h3>“시식 코너 옆에 본품 매대가 있어야 가게가 돕니다”</h3>
+      <p>검색 유입 글(무료 시식) 하나에 애드센스 광고만 붙여두면 방문자 99%는 영원히 사라집니다. 독자의 문제 깊이에 맞춰 한 계단씩 올라가는 사다리가 필요합니다.</p>
+      <div class="trans">
+        <b>👉 블로그 적용 한 줄</b>
+        무료 검색 글 ➔ 무료 웹 도구/템플릿 ➔ 전자책/가이드북 ➔ 심화 프로젝트 순으로 연결한다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ladder">
+  <span class="kicker">02 · 4단 가치 사다리</span>
+  <h2>단발성 블로그 vs 가치 사다리가 있는 블로그</h2>
+  <p class="sub">와우(WoW)에서 던전 입구까지 파티원을 힘들게 소환해 놓고 그냥 해산하면 허무하듯, 블로그 유입도 다음 던전으로 이어져야 자산이 됩니다.</p>
+  <div class="ladder">
+    <div class="rung">
+      <span class="step-tag">1단 · 무료 유입 글</span>
+      <div><strong>SEO · AI 검색 유입 포스팅</strong> — 독자의 급한 질문을 해결하고 신뢰의 첫인상을 남기는 입구 (애드센스 기본 수익)</div>
+      <span class="price-tag">무료 (검색 유입)</span>
+    </div>
+    <div class="rung highlight">
+      <span class="step-tag">2단 · 리드 &amp; 도구 오퍼 ⭐</span>
+      <div><strong>인터랙티브 HTML 설명 덱 · 계산기 · 복사용 템플릿</strong> — 글만 읽고 나갈 독자가 직접 숫자를 넣어보고 북마크하게 만드는 장치</div>
+      <span class="price-tag">무료 (체류·재방문 상승)</span>
+    </div>
+    <div class="rung">
+      <span class="step-tag">3단 · 프론트엔드 자산</span>
+      <div><strong>단행본형 PDF·EPUB 전자책 · 실전 템플릿 팩</strong> — 흩어진 블로그 글을 한 권의 체계적인 가이드로 묶어 시간을 아껴주는 상품</div>
+      <span class="price-tag">무료 배포 ~ 저가 (1~3만 원)</span>
+    </div>
+    <div class="rung">
+      <span class="step-tag">4단 · 백엔드 핵심 가치</span>
+      <div><strong>심화 강의 · 아키텍처 키트 · 맞춤형 프로젝트</strong> — 가장 깊은 문제를 해결하려는 소수의 열성 독자를 위한 단계</div>
+      <span class="price-tag">중고가 · 장기 파트너십</span>
+    </div>
+  </div>
+</section>
+
+<section id="simulator">
+  <span class="kicker">03 · 가상 수익 구조 시뮬레이터</span>
+  <h2>트래픽을 3배 늘리는 것 vs 사다리 한 칸을 더 놓는 것</h2>
+  <p class="sub">아래 슬라이더를 움직여 ‘애드센스 단독 모델’과 ‘가치 사다리(도구+저가 전자책) 결합 모델’의 산술적 차이를 비교해 보세요.</p>
+  <div class="sim-wrap">
+    <div>
+      <div class="control">
+        <label><span>월간 블로그 방문자 수</span><span id="v-visitors">10,000명</span></label>
+        <input type="range" id="in-visitors" min="2000" max="50000" step="1000" value="10000">
+      </div>
+      <div class="control">
+        <label><span>애드센스 Page RPM (1,000뷰당 수익)</span><span id="v-rpm">$5.0</span></label>
+        <input type="range" id="in-rpm" min="2" max="15" step="0.5" value="5">
+      </div>
+      <div class="control">
+        <label><span>2단 무료 도구/템플릿 클릭률 (Offer 전환)</span><span id="v-ctr">3.0%</span></label>
+        <input type="range" id="in-ctr" min="1" max="10" step="0.5" value="3">
+      </div>
+      <div class="control">
+        <label><span>3단 전자책(15,000원) 구매 전환율 (도구 사용자 중)</span><span id="v-conv">4.0%</span></label>
+        <input type="range" id="in-conv" min="0" max="10" step="0.5" value="4">
+      </div>
+    </div>
+    <div class="sim-out">
+      <div>
+        <div class="bar-group">
+          <div class="bar-label"><span>A. 애드센스 단독 (방문자당 1.2뷰 가정)</span><span id="out-ads-krw">약 82,800원</span></div>
+          <div class="bar-track"><div class="bar-fill fill-ads" id="bar-ads" style="width:30%"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>B. 애드센스 + 가치 사다리 3단 결합</span><span id="out-total-krw">약 262,800원</span></div>
+          <div class="bar-track"><div class="bar-fill fill-funnel" id="bar-funnel" style="width:95%"></div></div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><span>2단 도구·자료 경험 독자</span><strong id="out-leads">월 300명</strong></div>
+          <div class="kpi"><span>3단 전환 시 추가 가치</span><strong id="out-ebook">월 12명 (+18만 원)</strong></div>
+        </div>
+      </div>
+      <p class="sim-note">※ 환율 1,380원, 방문자당 1.2 페이지뷰 기준의 <strong>가상 시나리오 단순 산술 계산</strong>입니다. 실제 수익이나 전환율을 보장하지 않으며, 유료 판매 시에는 결제 수수료·환불 응대·사업자 세무 신고 등의 운영 부담이 발생합니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="channel-map">
+  <span class="kicker">04 · 실제 볼트 적용 지도</span>
+  <h2>제가 운영하는 3개 채널에 대입해 본 결과</h2>
+  <p class="sub">책을 읽고 돌아보니 그동안 만든 캐릭터(벨로키·트리노·파로)와 GitHub Pages HTML 도구들이 결국 이 사다리의 부품이었습니다.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>요소</th>
+          <th>TECHTAEK (테크·AI 실험실)</th>
+          <th>배당노마드 (미국 배당·현금흐름)</th>
+          <th>TAEK2 (생활금융·절세 탐정)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>매력적인 캐릭터</strong></td>
+          <td><strong>벨로키 (A)</strong> — 직접 돌려보고 실패 로그까지 까보는 클라우드·AI 실험자</td>
+          <td><strong>트리노</strong> — 세전 환상 대신 세후 원화 현금흐름을 따지는 배당 여행자</td>
+          <td><strong>파로</strong> — 월급날과 결제일 사이의 구멍을 공식 규정으로 찾는 탐정</td>
+        </tr>
+        <tr>
+          <td><strong>1단 (무료 글)</strong></td>
+          <td>모델 비용 비교, 보안 패치, 오픈소스 실측 후기</td>
+          <td>SCHD·QLD 매수일 비교, 배당금 변동 원인 분석</td>
+          <td>자녀 증여 한도, 부부 계좌 세금선, 연금저축 체크</td>
+        </tr>
+        <tr>
+          <td><strong>2단 (무료 도구 Offer)</strong></td>
+          <td>토큰 비용 계산기, 작업 순서 인터랙티브 HTML</td>
+          <td>원화 배당금 진단기, 적립식 백테스트 비교 페이지</td>
+          <td>부부 세금선 체크리스트, 증여 복리 계산기</td>
+        </tr>
+        <tr>
+          <td><strong>3단 (묶음 자산)</strong></td>
+          <td>전자책 『쌓아둔 메모를 다시 꺼내 쓰는 법』 (무료 웹/PDF 공개)</td>
+          <td>배당·성장 포트폴리오 리밸런싱 핸드북 (기획 후보)</td>
+          <td>가계 현금흐름 &amp; 절세 점검 시트 템플릿</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="templates">
+  <span class="kicker">05 · 바로 복사해서 쓰기</span>
+  <h2>블로그 글쓰기용 후크 - 스토리 - 제안 템플릿</h2>
+  <p class="sub">새 글을 쓸 때 빈 화면에서 고민하지 않도록 만든 마크다운 뼈대입니다. 버튼을 눌러 복사해 쓰세요.</p>
+  <div class="prompts">
+    <div class="prompt">
+      <h3>1. 포스팅 전체 3단 구조 (Hook-Story-Offer)</h3>
+      <pre id="t1">## [도입부: 검색 답변 + Hook]
+- 첫 문단: 독자가 검색한 질문의 핵심 답과 기준을 2문장으로 먼저 제시 (두괄식)
+- Hook: "다들 A라고 알고 있지만, 실제로 계산/실행해 보니 B에서 구멍이 났습니다."
+
+## [본문: Story &amp; 검증 근거]
+- 내가 왜 이 문제를 파게 되었는지(배경 질문)
+- 공식 문서/데이터/실측으로 확인한 비교표 1개
+- 내가 틀릴 수 있는 조건(예외 상황·한계) 명시
+
+## [결론: 내 생각(Attractive Character) + Offer]
+- 내 관점 한 문단: "제가 실무에서 다시 고른다면 X를 선택합니다. 이유는..."
+- 다음 행동 제안(Offer): "내 숫자를 직접 넣어보실 분은 아래 계산기/체크리스트를 바로 열어보세요."</pre>
+      <button class="copy-btn" data-copy="t1">템플릿 복사</button>
+    </div>
+    <div class="prompt">
+      <h3>2. 글 하단 Offer 콜아웃 문구 3종</h3>
+      <pre id="t2">[유형 A: 인터랙티브 도구 연결형]
+👉 눈으로만 읽으면 내 상황과 헷갈립니다. 내 숫자를 직접 넣어 비교할 수 있는 [무료 계산기/설명 페이지]를 따로 만들어 두었으니 바로 테스트해 보세요.
+
+[유형 B: 복사용 체크리스트/지시문 제공형]
+👉 오늘 글의 핵심 설정을 매번 다시 찾지 않도록 아래 코드 블록에 [복사용 체크리스트]를 정리해 두었습니다. 내 노트에 붙여넣고 하나씩 지워가며 점검해 보세요.
+
+[유형 C: 심화 허브/전자책 연결형]
+👉 이 주제를 처음부터 끝까지 한 권으로 묶어둔 [무료 전자책/허브 가이드]가 있습니다. 단편 글 대신 전체 흐름을 잡고 싶다면 이어서 읽어보세요.</pre>
+      <button class="copy-btn" data-copy="t2">문구 복사</button>
+    </div>
+  </div>
+</section>
+
+<section id="caution">
+  <div class="warn-box">
+    <h3>⚠️ 주의: 모든 글에 스토리를 길게 깔면 오히려 독자가 도망갑니다</h3>
+    <p>에러 메시지 해결법, 명령어 옵션, 세금 납부 기한처럼 <strong>독자가 10초 안에 답만 찾고 나가야 하는 검색어</strong>에 내 성장 배경(Backstory)부터 길게 늘어놓으면 바로 뒤로 가기를 누릅니다. 그래서 <strong>첫 문단에는 무조건 검색 질문의 답을 먼저 주고</strong>, 그 답을 확인한 뒤 더 깊이 알고 싶은 독자에게만 스토리와 도구(Offer)를 건네는 순서가 안전합니다.</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>안내 및 면책</strong>: 이 페이지는 러셀 브런슨의 『마케팅 설계자(DotCom Secrets)』(윌북, 2022) 독서 노트를 바탕으로 블로그 콘텐츠 구조를 설명하기 위해 만든 자료입니다. 시뮬레이터의 수치는 가정에 기반한 단순 산술 예시이며 특정 수익이나 전환율을 보장하지 않습니다.</p>
+  <p>
+    <a href="https://product.kyobobook.co.kr/detail/S000200472901" target="_blank" rel="noopener noreferrer">『마케팅 설계자』 도서 정보(교보문고)</a>
+    <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer">Google 검색 유용한 콘텐츠 가이드</a>
+    <a href="https://support.google.com/adsense/answer/48182?hl=ko" target="_blank" rel="noopener noreferrer">Google AdSense 프로그램 정책</a>
+    <a href="https://techtaek.com/" target="_blank" rel="noopener noreferrer">TECHTAEK 블로그</a>
+  </p>
+  <p>글·구성·벨로키(A) 삽화: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-ND 4.0</a> · 도서 제목 및 제3자 상표는 각 권리자에게 귀속 · 확인 기준일 2026-10-29 · 택택(techtaek77)</p>
+</footer>
+
+</main>
+<script>
+(function(){
+  var elV = document.getElementById('in-visitors');
+  var elR = document.getElementById('in-rpm');
+  var elC = document.getElementById('in-ctr');
+  var elB = document.getElementById('in-conv');
+
+  function fmt(n){ return Math.round(n).toLocaleString('ko-KR'); }
+
+  function update(){
+    var visitors = parseFloat(elV.value);
+    var rpm = parseFloat(elR.value);
+    var ctr = parseFloat(elC.value);
+    var conv = parseFloat(elB.value);
+
+    document.getElementById('v-visitors').textContent = fmt(visitors) + '명';
+    document.getElementById('v-rpm').textContent = '$' + rpm.toFixed(1);
+    document.getElementById('v-ctr').textContent = ctr.toFixed(1) + '%';
+    document.getElementById('v-conv').textContent = conv.toFixed(1) + '%';
+
+    var pageviews = visitors * 1.2;
+    var adsUsd = (pageviews / 1000) * rpm;
+    var adsKrw = adsUsd * 1380;
+
+    var leads = Math.round(visitors * (ctr / 100));
+    var buyers = Math.round(leads * (conv / 100));
+    var ebookKrw = buyers * 15000;
+    var totalKrw = adsKrw + ebookKrw;
+
+    document.getElementById('out-ads-krw').textContent = '약 ' + fmt(adsKrw) + '원';
+    document.getElementById('out-total-krw').textContent = '약 ' + fmt(totalKrw) + '원';
+    document.getElementById('out-leads').textContent = '월 ' + fmt(leads) + '명';
+    document.getElementById('out-ebook').textContent = '월 ' + fmt(buyers) + '명 (+' + fmt(ebookKrw / 10000) + '만 원)';
+
+    var maxVal = Math.max(totalKrw, 500000);
+    var wAds = Math.min(100, Math.max(6, (adsKrw / maxVal) * 100));
+    var wTot = Math.min(100, Math.max(6, (totalKrw / maxVal) * 100));
+    document.getElementById('bar-ads').style.width = wAds + '%';
+    document.getElementById('bar-funnel').style.width = wTot + '%';
+  }
+
+  [elV, elR, elC, elB].forEach(function(el){ el.addEventListener('input', update); });
+  update();
+
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click', async function(){
+      var target = document.getElementById(btn.getAttribute('data-copy'));
+      try {
+        await navigator.clipboard.writeText(target.innerText);
+        btn.textContent = '복사 완료!';
+      } catch (e) {
+        btn.textContent = '직접 선택해 복사해 주세요';
+      }
+      setTimeout(function(){ btn.textContent = '템플릿 복사'; }, 2000);
+    });
+  });
+})();
+</script>
+</body>
+</html>
